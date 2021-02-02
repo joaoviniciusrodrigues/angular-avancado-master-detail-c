@@ -34,14 +34,14 @@ export class CategoryService {
     )
 }
 
-create(category: Category): Observable<Category{
+create(category: Category): Observable<Category>{
   return this.http.post(this.apiPath, category).pipe(
     catchError(this.handleError),
       map(this.jsonDataToCategory)
   )
 }
 
-update(category: Category): Observable<Category{
+update(category: Category): Observable<Category>{
   const url = `${this.apiPath}/${category.id}`;
   
   return this.http.put(url, category).pipe(
@@ -70,7 +70,7 @@ private jsonDataToCategories(jsonData: any[]): Category[]{
   }
 
   private handleError(error: any): Observable<any>{
-    console.log("ERRO NA REQUISIÇÃO => " error);
+    console.log("ERRO NA REQUISIÇÃO => " + error);
     return throwError(error);
   }
 
