@@ -69,8 +69,6 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
 
   }
 
-
-
   // PRIVATE METHODS
   private setCurrentAction() {
 
@@ -121,8 +119,6 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     }
   }
 
-
-
   submitForm() {
     this.submittingForm = true;
 
@@ -132,8 +128,6 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
       this.updateEntry();
     }
   }
-
-
 
   private updateEntry() {
     const entry: Entry = Object.assign(new Entry(), this.entryForm.value)
