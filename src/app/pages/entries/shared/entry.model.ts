@@ -21,7 +21,11 @@ export class Entry extends BaseResourceModel {
         revenue: 'Receita'
     }
 
-     get paidText(): string {        
+    static fromJosn(jsonData: any) {
+        return Object.assign(new Entry(), jsonData);
+    }
+
+    get paidText(): string {
         return this.paid ? 'Pago' : 'Pedente';
     }
 }
