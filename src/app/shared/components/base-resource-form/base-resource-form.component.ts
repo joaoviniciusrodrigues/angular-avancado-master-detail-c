@@ -16,7 +16,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     pageTitle: string;
     serverErrorMessages: string[] = null;
     submittingForm: boolean = false;
-    protected jsonDataToResourceFn: (jsonData) => T;
+    
 
     protected route: ActivatedRoute;
     protected router: Router;
@@ -24,8 +24,9 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     constructor(
         protected injector: Injector,
-        public resource: T,
-        private resourceService: BaseResourceService<T>,
+        protected resource: T,
+        protected resourceService: BaseResourceService<T>,
+        protected jsonDataToResourceFn: (jsonData) => T
     ) {
 
         this.route = this.injector.get(ActivatedRoute);
@@ -35,7 +36,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     ngOnInit() {
         this.setCurrentAction();
-        this.buldCategoryForm();
+        this.buildResourceForm();
         this.loadResource();
     }
 
@@ -118,9 +119,11 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     protected updateResource() {
         const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
 
+        console.log(resource);
+
         this.resourceService.update(resource)
             .subscribe(
-                category => { this.actionsForSucess(category) },
+                resource => { this.actionsForSucess(resource) },
                 error => this.actionsForError(error)
             )
     }
@@ -152,6 +155,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     }
 
-    protected abstract buldCategoryForm(): void;
+    protected abstract buildResourceForm(): void;
 
 }

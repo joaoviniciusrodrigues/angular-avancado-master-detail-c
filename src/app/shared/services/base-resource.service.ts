@@ -41,11 +41,12 @@ export abstract class BaseResourceService<T extends BaseResourceModel>{
 
     update(resource: T): Observable<T> {
         const url = `${this.apiPath}/${resource.id}`;
-
-        return this.http.put("url", resource).pipe(            
+       
+        return this.http.put(url, resource).pipe(            
             map(() => resource),
             catchError(this.handleError)
         )
+
     }
 
     delete(id: number): Observable<any> {
