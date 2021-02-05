@@ -1,7 +1,6 @@
 <app-bread-crumb [items]="[{text: 'Lançamentos', link: '/entries'}, {text: pageTitle}]"></app-bread-crumb>
 
-<app-page-header [page-title]="pageTitle" button-text="<< Voltar" button-class="btn-light" button-link="new"></app-page-header>
-
+<app-page-header [page-title]="pageTitle" button-text="<< Voltar" button-class="btn-light" button-link="/entries"></app-page-header>
 
 <form [formGroup]="resourceForm" (submit)="submitForm()">
 
@@ -102,13 +101,8 @@
 
   </div>
 
-  <div class="alert alert-danger" *ngIf="serverErrorMessages">
-    <strong> Erro no servidor</strong>
-    <ul>
-      <li *ngFor="let error of serverErrorMessages"> {{error}} </li>
-    </ul>
-  </div>
-
+  <app-server-error-messages [server-error-messages]="serverErrorMessages"> </app-server-error-messages>
+  
   <button [disabled]="submittingForm || resourceForm.invalid" type="submit"
     class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
 
