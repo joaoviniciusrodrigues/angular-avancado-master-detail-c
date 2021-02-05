@@ -38,6 +38,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         this.setCurrentAction();
         this.buildResourceForm();
         this.loadResource();
+        console.log("teste")
     }
 
     ngAfterContentChecked() {
