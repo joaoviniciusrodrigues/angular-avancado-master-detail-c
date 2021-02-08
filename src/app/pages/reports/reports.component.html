@@ -36,9 +36,10 @@
           <option value="">Selectione um ano</option>
           <option value="2016">2016</option>
           <option value="2017">2017</option>
-          <option value="2018">2017</option>
-          <option value="2019">2017</option>
-          <option value="2010">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
         </select>
       </div>  
 
@@ -59,7 +60,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-body">
-            1500
+            {{revenueTotal}}
           </h3>
         </div>
 
@@ -72,7 +73,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-body">
-            1500
+            {{expenseTotal}}
           </h3>
         </div>
 
@@ -85,7 +86,7 @@
         </div>
         <div class="card-body">
           <h3 class="card-body">
-            1500
+            {{balance}}
           </h3>
         </div>
 
@@ -99,13 +100,11 @@
 <hr>
 
 <div class="row mt-5 mb-4">
- 
   <div class="col-md-6">
-    GRAFICO DE RECEITAS 
+    <p-chart type="bar" [data]="revenueChartData" [options]="chartOptions"></p-chart>
   </div>
 
   <div class="col-md-6">
-    GRAFICO DE DESPESAS 
+    <p-chart type="bar" [data]="expenseChartData" [options]="chartOptions"></p-chart>
   </div>
-  
 </div>
