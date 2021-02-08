@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import currencyFormatter from "currency-formatter"
 import { Category } from '../../categories/shared/categories.model';
 import { CategoryService } from '../../categories/shared/category.service';
@@ -32,30 +32,32 @@ export class HomeComponent implements OnInit {
   categories: Category[] = [];
   entries: Entry[] = [];
 
+
   constructor(private entryService: EntryService, private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.categoryService.getAll()
       .subscribe(categories => this.categories = categories);
-    this.generateReports();    
+    this.generateReports();
   }
 
 
   generateReports() {
-    var data = new Date();
-   
-    const month = data.getMonth();
-    const year = data.getFullYear();
+    const dataAtual = new Date();
+    
+    const month = dataAtual.getMonth() + 1;
+    const year = dataAtual.getFullYear();
+    
 
     if(!month || !year)
       alert('Você precisa selecionar o Mês e o Ano para gerar os relatórios')
     else
-       this.entryService.getByMonthAndYear(month, year).subscribe(this.setValues.bind(this))    
+      this.entryService.getByMonthAndYear(month, year).subscribe(this.setValues.bind(this))
   }
 
 
   private setValues(entries: Entry[]){
-    this.entries = entries;
+    this.entries = entries;    
     this.calculateBalance();
     this.setChartData();
   }
@@ -66,6 +68,8 @@ export class HomeComponent implements OnInit {
     let revenueTotal = 0;
 
     this.entries.forEach(entry => {
+
+      console.log(entry)
       if(entry.type == 'revenue')
         revenueTotal += currencyFormatter.unformat(entry.amount, { code: 'BRL' })
       else
